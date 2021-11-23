@@ -1,0 +1,97 @@
+[
+  {
+    "id": "5756",
+    "name": "GBP/USD",
+    "rate": "95"
+  },
+  {
+    "id": "2345",
+    "name": "EUR/USD",
+    "rate": "34"
+  },
+  {
+    "id": "3456",
+    "name": "EUR/GBP",
+    "rate": "56"
+  },
+  {
+    "id": "4567",
+    "name": "EUR/USD",
+    "rate": "45"
+  },
+  {
+    "id": "4322",
+    "name": "EUR/USD",
+    "rate": "56"
+  },
+  {
+    "id": "7686",
+    "name": "GBP/USD",
+    "rate": "450"
+  },
+  {
+    "id": "5634",
+    "name": "GBP/USD",
+    "rate": "670"
+  },
+  {
+    "id": "7890",
+    "name": "GBP/USD",
+    "rate": "34"
+  },
+  {
+    "id": "3434",
+    "name": "GBP/USD",
+    "rate": "56"
+  },
+  {
+    "id": "5667",
+    "name": "EUR/GBP",
+    "rate": "460"
+  },
+  {
+    "id": "4668",
+    "name": "EUR/GBP",
+    "rate": "450"
+  },
+  {
+    "id": "3455",
+    "name": "EUR/GBP",
+    "rate": "340"
+  },
+  {
+    "id": "4444",
+    "name": "EUR/GBP",
+    "rate": "44"
+  },
+  {
+    "id": "5555",
+    "name": "EUR/USD",
+    "rate": "505"
+  },
+  {
+    "id": "0001",
+    "name": "EUR/GBP",
+    "rate": "506"
+  },
+  {
+    "id": "0003",
+    "name": "EUR/USD",
+    "rate": "88"
+  },
+  {
+    "id": "1245",
+    "name": "GBP/USD",
+    "rate": "2400"
+  },
+  {
+    "id": "4321",
+    "name": "GBP/USD",
+    "rate": "230"
+  },
+  {
+    "id": "0002",
+    "name": "EUR/GBP",
+    "rate": "30"
+  }
+]

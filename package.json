@@ -1,0 +1,24 @@
+{
+  "name": "SMA project",
+  "version": "1.0.0",
+  "description": "Simple moving average",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node connection.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wh15k3rs/IST-4035-PROJECT-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wh15k3rs/IST-4035-PROJECT-2/issues"
+  },
+  "homepage": "https://github.com/wh15k3rs/IST-4035-PROJECT-2#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  }
+}

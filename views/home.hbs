@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Raleway:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
+
+  <title>
+    Currency SMA System
+  </title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<style>
+  .navbar{
+            /* background-color: rgb(81, 4, 153); */
+            background-color: #378a0d;
+            opacity: 0.8;
+            position: sticky;
+            
+        }
+  body {
+    background: #FFFF00;  
+    font-family: 'Raleway', sans-serif;
+            font-size: 1.3em;
+            overflow: scroll;
+  }
+  body::after {
+  content: "";
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+h3,p{
+  text-align: center;
+}
+
+ #intro{
+            color: purple;
+        }
+
+        #tut{
+            color: blue;
+        }
+        #calc{
+            color: purple;
+        }
+
+
+</style>
+
+</head>
+
+<body onload="fetchCurrencies()">
+  {{!-- nav bar --}}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <a class="navbar-brand" href="#">Simple Moving Average</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#intro">Introduction <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tut">Tutorial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#calc">Calculate</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+  <br><br><br>
+
+  {{!-- Intro paragraph --}}
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm-12" id="intro">
+          <h1 id="intro" style="text-align:center;">Introduction</h1>
+          <p style="color: black; text-align:center; padding-left:5%; padding-right:5% ">
+          Our website accomplishes the purpose of forecasting trends in currency exchange rates 
+          by the use of the the five-day moving averages of three pairs of currencies.
+          The moving average is an indicator used to represent the average closing price of the market 
+          over a specified period of time which is a period of five days
+          </p>
+      </div>
+    </div>
+
+    {{!-- Steps on moving average calculations --}}
+    <div>
+            <h1 id="tut" style="text-align:center;">Tutorial:</h1>
+            <p>
+              When provided with a sequential data set, 
+              you can determine the n-point moving average by computing the mean of each set of n successive points.
+            </p>
+
+             <p>
+                 In our case n is 5 as we are calculating a 5-day moving average
+               For instance, if you have the following sequential data set:
+
+              Closing prices: 2, 4, 6, 8, 12, 14, 16, 18, 20,
+              n=5
+              </p>
+            <h3>Step 1:</h3>
+            <p>Get the average of the first 5 points</p>
+            <p>A1= (2+4+6+8+12)/5 <br>
+            A1=6.4
+            </p>
+            
+            <h3>Step 2:</h3>
+            <p>Excluding value 1 get the average of the next 5 points</p>
+            <p>A2= (4+6+8+12+14)/5
+              <br>
+              A2=8.8
+            </p>
+            <h3>Step 3:</h3>
+            <p>Excluding value 1 and 2 get the average of the next 5 points</p>
+            <p>A3= (6+8+12+14+16)/5
+              <br>
+              A3=11.2
+            </p>
+            <h3>Step 4:</h3>
+            Repeat the above sequence till the last 5 values are averaged
+        </div><br>
+
+        <div>
+           <h1 id="calc" style="text-align:center;">Calculations and Graphing</h1>
+           <p>The moving average claculations start here. Click on the buttons depending on what action you want to achieve </p>
+        </div>
+
+        {{!-- Buttons --}}
+    <div class="row">
+      <div class="col-md-3"><button type="button" class="btn btn-primary " onclick="viewcontent()">VIEW ENTRIES</button></div><br><br>
+      <div class="col-md-3"><button type="button" class="btn btn-danger " onclick="addcontent()">ADD A NEW ENTRY</button></div><br><br>
+      <div class="col-md-3"><button type="button" class="btn btn-warning " onclick="editcontent()">EDIT AN ENTRY</button></div><br><br>
+      <div class="col-md-3"><button type="button" class="btn btn-secondary" onclick="deletecontent()">DELETE AN ENTRY</button></div>
+    </div>
+    <br><br><br>
+    
+    {{!-- Addind a currency form --}}
+    <div class="row">
+
+        <div class="col-md-4">
+          <div class="add">
+            <form>
+              <div class="form-group">
+                <label>Currency Name</label>
+                <select name="currency-name" id="currencyName" class="form-control">
+                  <option></option>
+                  <option value="EUR/USD">EUR/USD</option>
+                  <option value="GBP/USD">GBP/USD</option>
+                  <option value="EUR/GBP">EUR/GBP</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Currency ID (4 characters)</label>
+                <input type="text" class="form-control" name="currency-id" id="currencyId" placeholder="Enter a unique currency ID">
+              </div>
+              <div class="form-group">
+                <label>CURRENCY EXCHANGE RATE</label>
+                <input type="number" class="form-control" name="currency-rate" id="currencyRate" placeholder="Enter currency exchange rate">
+              </div>
+              <input type="submit" class="mx-auto btn btn-primary" value="ADD" id="submit">
+            </form>
+          </div>
+
+            {{!-- Search bar on top of currency view --}}
+          <div class="view">
+                <div class="text-center mt-3">
+                  <h5 class="text-center">Search through Currencies </h5>
+                  <div class="form-group form-group-lg">
+                    <input type="text" id="search" class="form-control mt-4" placeholder="Enter currency ID">
+                  </div>
+                  <div id="match-list"></div>
+                </div>
+            <table id="content" class="table table-striped  text-center mt-3"></table>
+          </div>
+
+            {{!-- Edit currency from --}}
+          <div class="edit">
+            <div class="text-center mt-3">
+              <h5>Search and Edit Currency Entry</h5>
+              <p>Condition:Search until only one entry appears on the screen</p>
+              <p>The data is clickable except ID</p>
+              <p>Click on the data value to enable editing</p>
+              <div class="form-group form-group-lg">
+                <input type="text" id="editSearch" class="form-control mt-4" placeholder="Enter currency ID">
+              </div>
+              <div id="edit-list"></div>
+            </div>
+          </div>
+
+            {{!-- Delete currency form --}}
+          <div class="delete">
+            <div class="text-center mt-3">
+              <h5>Search and Delete Currency Entry</h5>
+              <p>Condition: Search until only one entry appears on the screen</p>
+              <div class="form-group form-group-lg">
+                <input type="text" id="deleteSearch" class="form-control mt-4" placeholder="Enter currency ID">
+              </div>
+              <div id="delete-list"></div>
+            </div>
+          </div>
+        </div>
+      <br><br>
+         
+         {{!-- Graph area --}}
+      <div class="col-md-8 text-center ml-auto">
+        <h6>
+          A GRAPH DISPLAYING CURRENCY SMAs
+        </h6>
+        <p>Refresh the page to update chart values</p>
+        <canvas id="myChart" style=""></canvas>
+      </div>
+    </div>
+  </div>
+
+ {{!-- Chart data and Simple Moving average calulations --}}
+  <script>
+  var myurl;
+  $.getJSON("/currencies", function(data) {
+  myurl = data;
+  const average = 5;
+  var gbp = [];
+  var eurgbp = [];
+  var eur = [];
+
+  const gbpExRt = []
+  const eurgbpExRt = []
+  const eurExRt = []
+
+
+  const the_labels = []
+
+  const gbpmovingAverage = [];
+  const eurgbpmovingAverage = [];
+  const eurmovingAverage = [];
+  
+    //Grouping currencies according to similar types and 
+    //Storing exchange rate values in an array
+    
+  for (var i = 0; i < myurl.length; i++){
+    if("EUR/GBP" === myurl[i]["name"]){
+      eurgbp.push(parseInt(myurl[i]["rate"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("GBP/USD" === myurl[i]["name"]){
+      gbp.push(parseInt(myurl[i]["rate"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("EUR/USD" === myurl[i]["name"]){
+      eur.push(parseInt(myurl[i]["rate"]) )
+    }
+  }
+
+  //Simple Moving Average Calculations
+
+  for (i=0; i < gbp.length; i++) {
+      const fivedatapoints = gbp.slice(i, average + i);
+      gbpmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
+      // console.log(gbpmovingAverage);
+  }
+  for (i=0; i < eurgbp.length; i++) {
+      const fivedatapoints = eurgbp.slice(i, average + i);
+      eurgbpmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
+      // console.log(eurgbpmovingAverage);
+  }
+  for (i=0; i < eur.length; i++) {
+      const fivedatapoints = eur.slice(i, average + i);
+      eurmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
+      // console.log(eurmovingAverage);
+  }
+
+
+// console.log(Math.max(gbpmovingAverage.length, eurgbpmovingAverage.length, eurmovingAverage.length));
+
+
+//Getting the number of datapoints after SMA calculations so as to determine length of the X-AXIS
+  const randomlabels = Math.max(gbpmovingAverage.length, eurgbpmovingAverage.length, eurmovingAverage.length);
+  for (i=1; i < randomlabels; i++){
+    the_labels.push(`A${i}`)
+   
+  }
+
+
+
+    //Chart drawing
+    var ctx = document.getElementById("myChart").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [...the_labels], 
+        datasets: [
+          {
+          label: 'EUR/GBP',
+          data: [...eurgbpmovingAverage],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+          },
+          {
+            label: 'GBP/USD',
+            data: [...gbpmovingAverage], 
+            fill: false,
+            borderColor: 'rgb(255, 0, 0)',
+            tension: 0.1
+          },
+          {
+            label: 'EUR/USD',
+            data: [...eurmovingAverage],
+            fill: false,
+            borderColor: 'purple',
+            tension: 0.1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+});
+
+  </script>
+
+
+<script>
+
+
+</script>
+
+
+  <script type="text/javascript" src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+
+</html>
